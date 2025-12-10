@@ -1,35 +1,41 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 main()
-.then(()=>{
+  .then(() => {
     console.log("Success!");
-})
-.catch(err => console.log(err));
+  })
+  .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/test');
+  await mongoose.connect("mongodb://127.0.0.1:27017/test");
 }
 
 // Created Schema using mongoose.
 const userSchema = mongoose.Schema({
   name: String,
-  email : String,
-  age : Number
-})
+  email: String,
+  age: Number,
+});
 
 //Created Model (Collection) in mongoose.
-const User = mongoose.model("User",userSchema);
+const User = mongoose.model("User", userSchema);
 
-// Created a document (Object) of User class.
-const user1 = new User({
-  name : "Sam",
-  email : "SamJoshua2007@yahoo.com",
-  age : 18
-})
-
-// Saving it into the DB using save().
-user1.save().then((res)=>{
+User.insertMany([{
+  name : "Jones",
+  email : "jones@gmail.com",
+  age : 19,
+}, {
+  name : "Govind",
+  email : "govind@gmail.com",
+  age : 21
+}, {
+  name : "Praviin",
+  email : "pravinn@gmail.com",
+  age: 21
+}]).then((res)=>{
   console.log(res);
 }).catch((err)=>{
   console.log(err);
 })
+
+
